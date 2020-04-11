@@ -21,11 +21,11 @@ ApiKey apiKey = apiKeyBuilder.build();
 apiKey.use() // Returns String value. Is thread safe.
 ```
 
-## Multiple Key Use (Default values)
+## Multiple Key Use
 
 ```
 ApiKeyManager.addKey(new ApiKey("yourKeyHere"));
-ApiKeyManager.addKey(new ApiKey("otherKeyHere"));
+ApiKeyManager.addKey(new ApiKeyBuilder("otherKeyHere").setMaximumCallsPerCycle(30).build());
 
 apiKeyManager.takeKeyPhrase() // Returns String value. Is thread safe.
 ```
