@@ -41,23 +41,23 @@ public class ApiKey {
      */
     public String useKeyPhrase() throws MaximumCallsReachedException, KeyInUseException
     {
-        if (lock.tryLock())
+        if (lock.tryLock()) // If not locked then lock for thread use
         {
             try
             {
                 locksInCurrentCycle.incrementAndGet();
 
-                if (keyIsAvailable())
+                if (keyIsAvailable()) // Return key
                 {
                     if (executorService == null) startCycle();
                     return keyPhrase;
                 }
-                else
+                else // Maximum calls have been reached
                 {
                     throw new MaximumCallsReachedException("Maximum Api calls reached with key: " + keyPhrase);
                 }
             }
-            finally
+            finally // Unlock the key for use
             {
                 lock.unlock();
             }
@@ -68,6 +68,10 @@ public class ApiKey {
         }
     }
 
+    /**
+     * Check if maximum calls is greater than calls made in the current cycle
+     * @return boolean
+     */
     private boolean keyIsAvailable()
     {
         return callsMadeInCurrentCycle.get() < maximumCallsPerCycle;
