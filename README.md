@@ -24,8 +24,10 @@ apiKey.use() // Returns String value. Is thread safe.
 ## Multiple Key Use
 
 ```
+ApiKeyManager apiKeyManager = new ApiKeyManager();
+
 ApiKeyManager.addKey(new ApiKey("yourKeyHere"));
 ApiKeyManager.addKey(new ApiKeyBuilder("otherKeyHere").setMaximumCallsPerCycle(30).build());
 
-apiKeyManager.takeKeyPhrase() // Returns String value. Is thread safe.
+apiKeyManager.getAnyAvailableKey() // Returns String value. Is thread safe.
 ```
