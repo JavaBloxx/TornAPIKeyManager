@@ -31,7 +31,7 @@ public class ApiKey {
 
         maximumCallsPerCycle = 100;
         secondsPerCycle = 60;
-        
+
         locksInCurrentCycle = new AtomicInteger(0);
         callsMadeInCurrentCycle = new AtomicInteger(0);
     }
@@ -42,7 +42,7 @@ public class ApiKey {
      * @throws MaximumCallsReachedException maximum calls have been reached until the next cycle begins
      * @throws KeyInUseException another thread is currently accessing the key
      */
-    public String useKeyPhrase() throws MaximumCallsReachedException, KeyInUseException
+    public String use() throws MaximumCallsReachedException, KeyInUseException
     {
         if (lock.tryLock()) // If not locked then lock for thread use
         {
