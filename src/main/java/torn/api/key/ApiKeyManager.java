@@ -7,23 +7,23 @@ import java.util.LinkedList;
 
 public class ApiKeyManager {
 
-    private static LinkedList<ApiKey> apiKeys = new LinkedList<>();
+    private LinkedList<ApiKey> apiKeys = new LinkedList<>();
 
-    public static String takeKeyPhrase()
+    public String getAnyAvailableKey()
     {
         while (true)
         for (ApiKey apiKey : apiKeys)
         {
             try
             {
-                return apiKey.useKeyPhrase();
+                return apiKey.use();
             }
             catch (MaximumCallsReachedException | KeyInUseException ignored)
             {}
         }
     }
 
-    public static void addApiKey(ApiKey apiKey)
+    public void addApiKey(ApiKey apiKey)
     {
         apiKeys.add(apiKey);
     }
