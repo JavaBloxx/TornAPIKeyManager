@@ -29,6 +29,9 @@ public class ApiKey {
     {
         this.keyPhrase = keyPhrase;
 
+        maximumCallsPerCycle = 100;
+        secondsPerCycle = 60;
+        
         locksInCurrentCycle = new AtomicInteger(0);
         callsMadeInCurrentCycle = new AtomicInteger(0);
     }
